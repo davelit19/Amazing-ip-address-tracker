@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+}
+html {
+    font-size: 18px;
+}
+:root {
+    --Very-Dark-Gray: hsl(0, 0%, 17%);
+--Dark-Gray: hsl(0, 0%, 59%);
+}
+
+body{
+    min-height: 100vh; 
+    font-family: 'Rubik', sans-serif;
+    text-align: center;
+ 
+}
+.mapTop {
+    background-image: url("images/pattern-bg-desktop.png");
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.input-div {
+    margin-bottom: 18vh;
+}
+h1 {
+   font-size: 2rem;
+   font-weight: 400;
+   color: #fff;
+   margin: 30px 0
+}
+.searchIp {
+    font-size: 1rem;
+    width: 35vw;
+    padding: 17px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+  .btn {
+    margin-left: -5px;
+    padding: 0 18px;
+    height: 8.7vh;
+   background-color: var(--Very-Dark-Gray);
+   border-top-right-radius: 10px;
+   border-bottom-right-radius: 10px;
+   cursor: pointer;
+}
+ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    width: 80vw;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    position: absolute;
+    bottom: 46vh;
+    z-index: 2;
+}
+li {
+    width: 25%;
+    display: flex;
+}
+
+h2 {
+    font-size: 0.7rem;
+    color: var(--Dark-Gray);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+}
+li p {
+    font-weight: 500;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+}
+hr {
+    width: 1px;
+    margin: 10px 30px 0 10px;
+    background-color: var(--Very-Dark-Gray);
+    border-radius: 3px;
+    height: 65px;
+}
+#map { 
+    width: 100%;
+    height: 60vh; 
+    z-index: 1;
+    
+}
+@media (max-width: 962px) and (min-width: 755px){
+    ul {
+        width: 95vw;
+    }
+}
+@media (max-width: 755px){
+    ul {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 0 5px;
+        bottom: 30vh;
+        width: 90%;
+    }
+    li {
+        width: 90%;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    hr {
+        display: none;
+    }
+
+.input-div {
+    margin-bottom: 22vh;
+    width: 90%;
+}
+.searchIp {
+    font-size: 1rem;
+    width: 85%;
+    padding: 17px;
+
+}
+p {
+    font-size: 1rem;
+}
+
+}

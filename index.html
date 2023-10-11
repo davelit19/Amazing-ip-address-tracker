@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link href="styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <title>Frontend Mentor | IP Address Tracker</title>
+</head>
+
+<body>
+  <header class="mapTop">
+    <h1>IP Address Tracker</h1>
+    <div class="input-div">
+      <input type="text" class="searchIp" placeholder="Search for any IP address or domain" id="inputValue">
+      <button class="btn" id="btn">
+        <img src="images/icon-arrow.svg" alt="arrow">
+      </button>
+    </div>
+    <ul>
+      <li>
+        <div>
+          <h2>IP Address</h2>
+          <p id="p1"></p>
+        </div>
+      </li>
+      <li>
+        <hr>
+        <div>
+          <h2>Location</h2>
+          <p id="p2"></p>
+        </div>
+      </li>
+      <li>
+        <hr>
+        <div>
+          <h2>Timezone</h2>
+          <p id="p3"></p>
+        </div>
+      </li>
+      <li>
+        <hr>
+        <div>
+          <h2>ISP</h2>
+          <p id="p4"></p>
+        </div>
+      </li>
+    </ul>
+  </header>
+  <div id="map"></div>
+  <script>
+   
+
+    //Setting the map view 
+    const map = L.map('map').setView([0, 0], 4);
+
+    //initializing the marker default position if no ip address is entered
+    const marker = L.marker([0, 0]).addTo(map)
+
+       //Adding tiles layer to the map
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(map);
+    
+
+ //Events triggers if the button element is clicked and the function runs
+      document.getElementById("btn").addEventListener("click", function () { 
+  
+    let inputIp = document.getElementById("inputValue").value;
+      fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=at_QkorG0VpOERSr3BVtjv8by8JGo2C1&ipAddress=${inputIp}`)
+      .then(response => response.json())
+      .then(data => {
+       
+      //gettiing the latitude and longitude values   110.36.165.170
+      const latitude = data.location.lat;
+      const longitude = data.location.lng;
+
+      //get and modify the p elements
+      document.getElementById("p1").textContent = data.ip;
+      document.getElementById("p2").innerHTML = data.location.region + "," + data.location.city;
+      document.getElementById("p3").textContent = data.location.timezone;
+      document.getElementById("p4").textContent = data.isp;
+
+      //navigate the  marker to the location of the entered ip address
+      marker.setLatLng([latitude, longitude]).bindPopup('Over here 👋');
+
+        map.panTo([latitude, longitude])
+      console.log(latitude, longitude, data)  
+
+      })
+      .catch(err => alert("Enter a valid Ip Address"))
+      })
+  </script>
+</body>
+
+</html>
